@@ -1,0 +1,144 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #F3F0F7; /* Light lilac background */
+}
+
+h1, h2, h3 {
+    color: #6B5B95; /* Lilac color for headings */
+}
+
+a {
+    color: #E67E22; /* Dark orange for links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Form styles */
+form {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 500px; /* Form width limit */
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="datetime-local"],
+input[type="submit"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #DDD;
+}
+
+input[type="submit"] {
+    background-color: #E67E22; /* Dark orange color */
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #D35400; /* Darker orange */
+}
+
+/* Validation error styles */
+.error {
+    color: #D9534F; /* Red color for errors */
+}
+
+/* Table styles */
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 800px; /* Table width limit */
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #6B5B95; /* Lilac color for table headers */
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Button and link styling */
+button,
+a[href="users/add"],
+input[type="submit"] {
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    background-color: #E67E22; /* Dark orange color for add user button */
+    color: white;
+    border: none; /* Remove border */
+    text-decoration: none;
+}
+
+button:hover,
+a[href="users/add"]:hover {
+    background-color: #D35400; /* Darker orange on hover */
+}
+
+/* Specific to task items and buttons within the form */
+#subtasks div {
+    margin-bottom: 15px;
+}
+
+/* Improving the visibility and usability of the 'Remove' button */
+button[type="button"] {
+    background-color: #D9534F; /* Red color for delete buttons */
+    color: white;
+    margin-left: 10px; /* Add some space between the input field and the button */
+}
+
+button[type="button"]:hover {
+    background-color: #C9302C; /* Darker red on hover */
+}
+
+/* Confirmation button style */
+button[type="submit"] {
+    background-color: #5CB85C; /* Green for confirm/save buttons */
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #4CAE4C; /* Darker green on hover */
+}
+
+/* Styling for the 'Cancel New Subtask' and 'Add Subtask' buttons */
+button[type="button"][onclick*="cancelNewSubtask"],
+button[type="button"][onclick*="addSubtask"] {
+    background-color: #5BC0DE; /* Light blue for auxiliary actions */
+    color: white;
+}
+
+button[type="button"][onclick*="cancelNewSubtask"]:hover,
+button[type="button"][onclick*="addSubtask"]:hover {
+    background-color: #31B0D5; /* Darker blue on hover */
+}

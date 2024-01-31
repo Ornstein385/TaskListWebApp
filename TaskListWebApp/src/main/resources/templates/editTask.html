@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Task</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <script>
+        let newSubtaskIndex = 0;
+
+        function addSubtask() {
+            const container = document.getElementById('subtasks');
+            const div = document.createElement('div');
+            div.setAttribute('id', 'subtask' + newSubtaskIndex);
+            div.innerHTML = `
+                <input type="text" name="taskItems[${newSubtaskIndex}].name" placeholder="Subtask Name" />
+                <input type="text" name="taskItems[${newSubtaskIndex}].description" placeholder="Subtask Description" />
+                <input type="checkbox" name="taskItems[${newSubtaskIndex}].ready" /> Mark as Ready
+                <button type="button" onclick="removeSubtask(${newSubtaskIndex})">Remove</button>
+            `;
+            container.appendChild(div);
+            newSubtaskIndex++;
+        }
+
+        function removeSubtask(index) {
+            const subtask = document.getElementById('subtask' + index);
+            if (subtask) {
+                subtask.remove();
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Edit Task</h1>
+<form th:action="@{/tasks/{id}(id=${task.id})}" th:object="${task}" method="post">
+    <input type="hidden" name="_method" value="put" />
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description" th:field="*{description}" required />
+    </div>
+    <div>
+        <label for="deadline">Deadline:</label>
+        <input type="datetime-local" id="deadline" th:field="*{deadline}" />
+    </div>
+
+    <h3>Subtasks</h3>
+    <div id="subtasks">
+        <div th:each="taskItem, iterStat : *{taskItems}">
+            <input type="text" th:name="|taskItems[${iterStat.index}].name|" th:value="${taskItem.name}" placeholder="Subtask Name" />
+            <input type="text" th:name="|taskItems[${iterStat.index}].description|" th:value="${taskItem.description}" placeholder="Subtask Description" />
+            <input type="checkbox" th:name="|taskItems[${iterStat.index}].ready|" th:checked="${taskItem.ready}" /> Mark as Ready
+            <button type="button" th:onclick="|removeSubtask(${iterStat.index})|">Remove</button>
+        </div>
+    </div>
+    <button type="button" onclick="addSubtask()">Add Subtask</button>
+    <button type="button" onclick="cancelNewSubtask()">Cancel New Subtask</button>
+
+    <div>
+        <button type="submit">Save Task</button>
+    </div>
+</form>
+<a th:href="@{/tasks}">Return to Task List</a>
+</body>
+</html>

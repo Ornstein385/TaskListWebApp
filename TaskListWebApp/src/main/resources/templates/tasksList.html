@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Task List</h1>
+<div>
+    <a th:href="@{/tasks/add}">Add New Task</a> | <a th:href="@{/users}">All Users</a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Deadline</th>
+        <th>Assigned to</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.id}"></td>
+        <td th:text="${task.name}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.deadline}"></td>
+        <td th:text="${task.user.name}"></td>
+        <td>
+            <a th:href="@{/tasks/{id}(id=${task.id})}">Details</a> |
+            <a th:href="@{/tasks/{id}/edit(id=${task.id})}">Edit</a> |
+            <form th:action="@{/tasks/{id}(id=${task.id})}" method="post" style="display:inline">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

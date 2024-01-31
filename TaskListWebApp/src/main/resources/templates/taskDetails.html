@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div th:if="${task}">
+    <h2>Task Details</h2>
+    <div>
+        <strong>User:</strong> <span th:text="${task.user.name}">User Name</span>
+    </div>
+    <div>
+        <strong>Name:</strong> <span th:text="${task.name}">Task Name</span>
+    </div>
+    <div>
+        <strong>Description:</strong> <span th:text="${task.description}">Task Description</span>
+    </div>
+    <div>
+        <strong>Creation Time:</strong> <span th:text="${task.creationTime}">Creation Time</span>
+    </div>
+    <div>
+        <strong>Deadline:</strong> <span th:text="${task.deadline}">Deadline</span>
+    </div>
+
+    <h3>Task Items</h3>
+    <div th:if="${task.taskItems.empty}">
+        <p>No task items available.</p>
+    </div>
+    <div th:if="${!task.taskItems.empty}">
+        <ul>
+            <li th:each="taskItem : ${task.taskItems}">
+                <div>
+                    <strong>Item Name:</strong> <span th:text="${taskItem.name}">Item Name</span>
+                </div>
+                <div>
+                    <strong>Description:</strong> <span th:text="${taskItem.description}">Description</span>
+                </div>
+                <div>
+                    <strong>Status:</strong>
+                    <input type="checkbox" th:checked="${taskItem.ready}" disabled="disabled"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:unless="${task}">
+    <p>Task not found.</p>
+</div>
+
+</body>
+</html>

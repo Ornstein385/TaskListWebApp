@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add New Task</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Add New Task</h1>
+<form th:action="@{/tasks}" th:object="${task}" method="post">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="*{name}" required />
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" th:value="*{description}" required />
+  </div>
+  <div>
+    <label for="deadline">Deadline (ddMMyyyy hhmm):</label>
+    <input type="datetime-local" id="deadline" name="deadline" th:value="*{deadline}" required
+           pattern="\d{2}\d{2}\d{4} \d{2}\d{2}" placeholder="DDMMYYYY HHMM"/>
+  </div>
+  <div>
+    <label for="user">User:</label>
+    <select id="user" name="user.id" required>
+      <option value="">Select User</option>
+      <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+    </select>
+  </div>
+  <div>
+    <button type="submit">Save</button>
+  </div>
+</form>
+<a th:href="@{/tasks}">Return to Task List</a>
+</body>
+</html>

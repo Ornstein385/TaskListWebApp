@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>User Details</h1>
+<p>ID: <span th:text="${user.id}"></span></p>
+<p>Name: <span th:text="${user.name}"></span></p>
+<p>Email: <span th:text="${user.email}"></span></p>
+<p>Tg Name: <span th:text="${user.tgName}"></span></p>
+<p>User Tasks: <a th:href="@{/tasks/user/{id}(id=${user.id})}">View Tasks</a></p>
+
+<br><br>
+<a th:href="@{/users/{id}/edit(id=${user.id})}">Edit User</a>
+<br><br>
+<form th:method="delete" th:action="@{/users/{id}(id=${user.id})}">
+    <input type="submit" value="Delete">
+</form>
+<br><br>
+<a href="/users">Back to User List</a>
+</body>
+</html>
